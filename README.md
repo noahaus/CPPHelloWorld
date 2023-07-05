@@ -1,4 +1,5 @@
 # CPPHelloWorld
 Code for C++ beginner
 
-Adding initially
+What is new?
+- array_datastruct.cpp was added with comments. 
