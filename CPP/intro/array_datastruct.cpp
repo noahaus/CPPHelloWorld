@@ -22,14 +22,14 @@ void sum(int *arr_list) {
 }
 
 // use vector notation here
-void diag(int *matrix, size_t arr_row, size_t arr_col){
+void diag(const std::vector<std::vector<int>> &arr){
     int result=0;
     
 
-    for(int i = 0; i < arr_row; i++){
-        for(int j = 0; j < arr_col; j++){
+    for(int i = 0; i < arr.at(0).size(); i++){
+        for(int j = 0; j < arr.size(); j++){
             if(i==j){
-                result += matrix[i][j];
+                result += arr.at(i).at(j);
             }
             cout << "matrix diag sum total: " << result << endl;
         }
@@ -57,13 +57,15 @@ int main() {
     // THIS WAS THE HARDEST THING TO LEARN, 
     // granted I did all of this before learning how to properly use pointers
 
-    int mat [3][3] = {{1,2,3}, {4,5,6}, {7,8,9}};
-    size_t arr_row = sizeof(mat) / sizeof(*mat);
-    size_t arr_col = sizeof(*mat) / sizeof(*mat[0]);
+
+    std::vector<std::vector<int>> mat(3, std::vector<int>(3));
+    mat = {{1,2,3}, {4,5,6}, {7,8,9}};
+    //size_t arr_row = sizeof(mat) / sizeof(*mat);
+    //size_t arr_col = sizeof(*mat) / sizeof(*mat[0]);
 
     // let's practice this again by using the multidimensional array
     // as input
-    diag(*mat,arr_row,arr_col); 
+    diag(mat); 
 
     return 0; 
 }
