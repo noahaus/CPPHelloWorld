@@ -23,7 +23,8 @@ void sum(int *arr_list) {
 
 // use vector notation here
 void diag(const std::vector<std::vector<int>> &arr){
-    int result=1;
+
+    int result=1; // change result from 0 to 1
     
 
     for(int i = 0; i < arr.at(0).size(); i++){
@@ -63,6 +64,7 @@ int main() {
     std::vector<std::vector<int>> mat(3, std::vector<int>(3));
     mat = {{1,2,3,100}, {4,5,6,345}, {7,8,9,228}};
     
+
     diag(mat); 
 
     return 0; 
