@@ -23,17 +23,20 @@ void sum(int *arr_list) {
 
 // use vector notation here
 void diag(const std::vector<std::vector<int>> &arr){
-    int result=0;
+
+    int result=1; // change result from 0 to 1
     
 
     for(int i = 0; i < arr.at(0).size(); i++){
         for(int j = 0; j < arr.size(); j++){
             if(i==j){
-                result += arr.at(i).at(j);
+                result *= arr.at(i).at(j);
             }
-            cout << "matrix diag sum total: " << result << endl;
+            
         }
     }
+
+    cout << "matrix diag product total: " << result << endl;
 
 
 }
@@ -59,12 +62,9 @@ int main() {
 
 
     std::vector<std::vector<int>> mat(3, std::vector<int>(3));
-    mat = {{1,2,3}, {4,5,6}, {7,8,9}};
-    //size_t arr_row = sizeof(mat) / sizeof(*mat);
-    //size_t arr_col = sizeof(*mat) / sizeof(*mat[0]);
+    mat = {{1,2,3,100}, {4,5,6,345}, {7,8,9,228}};
+    
 
-    // let's practice this again by using the multidimensional array
-    // as input
     diag(mat); 
 
     return 0; 
