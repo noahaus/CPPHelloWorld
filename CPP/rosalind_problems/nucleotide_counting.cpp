@@ -31,6 +31,7 @@ void nucleotide_count(string seq) {
 
     string output = " ";
 
+    // The for loop starts here. 
     for(int i = 0; i < seq.length(); i++){
         current_nucleotide = seq[i];
         switch(current_nucleotide){
