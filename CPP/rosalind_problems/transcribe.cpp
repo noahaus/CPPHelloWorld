@@ -27,21 +27,22 @@ GAUGGAACUUGACUACGUAAAUU
 */
 
 void transcribe(string seq){
-    string transcribed_seq = "";
+    string transcribed_seq = seq;
     char current_nuc = ' ';
     char transcribed_nuc = ' ';
     
-    for(int i = 0; i < seq.length();i++){
-        current_nuc = seq[i];
+    for(int i = 0; i < transcribed_seq.length();i++){
+        current_nuc = transcribed_seq[i];
         if(current_nuc == 'T'){
-            seq[i] = 'U';
+            transcribed_seq[i] = 'U';
         } 
         else{
             continue;
         }
     }
 
-    cout << seq << endl;
+    cout << transcribed_seq << endl;
+
 
 
 
