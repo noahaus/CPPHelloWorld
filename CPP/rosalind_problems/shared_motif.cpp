@@ -3,6 +3,7 @@
 #include <map>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -29,10 +30,31 @@ struct seq {
     string sequence;
 };
 
+
 void printStruct(const seq& s) {
     std::cout << "ID: " << s.id << std::endl;
     std::cout << "Sequence: " << s.sequence << std::endl;
 }
+
+bool shared(string sub, vector<seq> strings){
+    bool isShared = true;
+    int current = 0;
+    for(seq record: strings){
+        if(current == 0){
+            current++;
+            continue;
+        }
+
+        //return the value as boolean
+        isShared = record.sequence.find(sub) != std::string::npos;
+        if(isShared == false){
+            return false;
+        }
+    }
+
+    return true;
+}
+
 
 
 int main(int argc, char* argv[]){
@@ -84,21 +106,54 @@ int main(int argc, char* argv[]){
             continue;
         }
         else {
-            record.sequence = record.sequence + line;
+            record.sequence.erase(std::remove(record.sequence.begin(), record.sequence.end(), '\r'), record.sequence.cend());
+            record.sequence += line;
+            //cout << record.id << endl << record.sequence << endl << endl;
             if(line_counter == file_length){
                 fasta.insert(fasta.end(),record);
             }
         }
     }
 
- for (auto element :fasta){
-        printStruct(element);
+
+// can we find the common substring in a group of strings?
+string first_seq = fasta[0].sequence;
+string lcs = "";
+bool isShared = false;
+
+//inital values for the first substring
+int first_index = 0;
+int substr_len = 2;
+
+//max values as we go through the string
+int max_index = first_index;
+int max_len = substr_len;
+
+//loop through the first sequence until we find the longest substring
+while(first_index + substr_len < first_seq.length()){
+    //intialize and then check if the substring is in the other seqs
+    lcs = first_seq.substr(first_index,substr_len);
+    //cout << first_index << " " << substr_len << endl;
+    //cout << lcs << endl;
+    isShared = shared(lcs, fasta);
+
+
+    if(isShared){
+        if(substr_len > max_len){
+            max_index = first_index;
+            max_len = substr_len;
+        }
+
+        substr_len++;
+    }
+
+    else {
+        first_index++;
+        substr_len = 2;
+    }
+
 }
 
-//test to see if loop worked 
-//cout << line_counter << endl;
-
-//STEP 2: FIND SHARED 2-MER POSITION
+cout << first_seq.substr(max_index,max_len) << endl;
 
 }
-
